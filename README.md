@@ -1,27 +1,17 @@
 flask源码进阶 
 =======
 
-《Python进阶》是《Intermediate Python》的中文译本, 谨以此献给进击的 Python 和 Python 程序员们!
+《flask源码进阶》是一本详尽的flask的源代码分析的书籍，通过falsk源码的学习，对整个web框架流程做到心知肚明。
 
 ### 快速阅读传送门
-- Github快速阅读任一章节：[进入目录](https://github.com/eastlakeside/interpy-zh/blob/master/SUMMARY.md)
+- Github快速阅读任一章节：[进入目录](https://github.com/aiopsclub/flask-analysis/blob/master/SUMMARY.md)
 - Gitbook完整顺序地阅读：[进入Gitbook](https://eastlakeside.gitbooks.io/interpy-zh/content/)
-- 本地或kindle上阅读：[下载pdf/epub/mobi](https://github.com/eastlakeside/interpy-zh/releases)
-- 国内推荐镜像（实时同步）：[极客学院收录](http://wiki.jikexueyuan.com/project/interpy-zh/)
-- 其他镜像（不定期同步）：[Pythontab收录](http://docs.pythontab.com/interpy/)
-- 纯代码阅读和演示：[进入code目录](https://github.com/eastlakeside/interpy-zh/tree/master/code/)
+- 本地或kindle上阅读：[下载pdf/epub/mobi](https://github.com/aiopsclub/flask-analysis/releases)
 
 # 前言
 
-Python，作为一个"老练"、"小清新"的开发语言，已受到广大才男俊女的喜爱。我们也从最基础的Python粉，经过时间的摧残慢慢的变成了Python老鬼。
-
-IntermediatePython这本书具有如下几个优点：
-
-1. 简单
-2. 易读
-3. 易译
-
-这些都不是重点，重点是：**它是一本开脑洞的书**。无论你是Python初学者，还是Python高手，它显现给你的永远是Python里最美好的事物。
+Python作为在互联网领域广泛使用的语言，在运维、AI、数据科学、web开发、安全等多个领域大放异彩，对于一个互联网人，python是必须掌握的。
+而在web开发领域，flask作为微型框架，有着麻雀虽小，五脏俱全的特点，同时还可以通过众多的扩展来增强flask的威力。对于如何掌握flask的精髓，那莫过于熟悉其原理带给我们的收益最大了。此书就带你领略flask源码的整体结构，我相信，等我一起看完这本书，flask对你来说就是个小工具而已，甚至你都可以开始定制自己的python web框架了。
 
 > 
 世上语言千万种
@@ -39,19 +29,14 @@ IntermediatePython这本书具有如下几个优点：
 ## 原书作者
 感谢英文原著作者 @yasoob《[Intermediate Python](https://github.com/yasoob/intermediatePython)》，有了他才有了这里的一切
 
-## 译者
-总顾问+审校: 刘宇 @liuyu  
-主译: PyCon老高 @spawnris  
-主译: 大牙matt @suqi  
-参译: 明源 @muxueqz  
+## 作者 
+主要作者: 苑雄雄 @yxxhero  
+
+## 作者介绍
+工作领域： 运维开发师 系统工程师 
+喜爱语言： python JavaScript golang shell等
+关注领域： AI SRE
 
 ## 欢迎建议指正或直接贡献代码
-https://github.com/eastlakeside/interpy-zh/issues
-
-### 微信交流群
-> ![微信群](http://weixin.qq.com/cgi-bin/qrcode?type=user&arg=jhv6N4MIK9IDG4EsaWmnxmNexVuB23%2FhP60VbvUsRE8%3D)
-
-### 微信打赏支持：
-> ![wechat_donate](__img/donate.png)
-
+https://github.com/aiopsclub/flask-analysis/issues
 
