@@ -2,9 +2,7 @@
 
 * [简介](README.md)
    * [序](Introduction.md)
-   * [译后感](translator.md)
-   * [原作者前言](author.md)
-* [*args 和 **kwargs](args_kwargs/README.md)
+* [代码目录与详解](code_structure/overview.md)
    * [*args 的用法](args_kwargs/Usage_args.md)
    * [**kwargs 的用法](args_kwargs/Usage_kwargs.md)
    * [使用 *args 和 **kwargs 来调用函数](args_kwargs/Using_args_and_kwargs_to_call_function.md)
