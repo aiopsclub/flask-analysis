@@ -1,6 +1,5 @@
-flask源码进阶 
+flask源码进阶[version: 1.1.1] 
 =======
-# flask版本: 1.1.1 
 
 《flask源码进阶》是一本详尽的flask的源代码分析的书籍，通过falsk源码的学习，对整个web框架流程做到心知肚明。
 
