@@ -8,10 +8,6 @@
 - 本地或kindle上阅读：[下载pdf/epub/mobi](https://github.com/aiopsclub/flask-analysis/releases)
 
 # 前言
-
+> 
 Python作为在互联网领域广泛使用的语言，在运维、AI、数据科学、web开发、安全等多个领域大放异彩，对于一个互联网人，python是必须掌握的。
 而在web开发领域，flask作为微型框架，有着麻雀虽小，五脏俱全的特点，同时还可以通过众多的扩展来增强flask的威力。对于如何掌握flask的精髓，那莫过于熟悉其原理带给我们的收益最大了。此书就带你领略flask源码的整体结构，我相信，等我一起看完这本书，flask对你来说就是个小工具而已，甚至你都可以开始定制自己的python web框架了。
-
-> 
-世上语言千万种
-美好事物藏其中
