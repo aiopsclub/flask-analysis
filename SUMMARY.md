@@ -6,6 +6,7 @@
    * [artwork目录](dir_analysis/artwork.md)
    * [docs目录](dir_analysis/docs.md)
    * [examples目录](dir_analysis/examples.md)
+   * [tests目录](dir_analysis/tests.md)
 * [推荐阅读](seealso.md)
 * [捐赠名单](donors.md)
 
