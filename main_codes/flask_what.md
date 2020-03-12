@@ -100,7 +100,17 @@ Flask封装Werkzeug，用它来处理WSGI的细节，同时通过提供更多的
 werkzeug内部的调用逻辑:  
 1. make_server返回BaseWSGIServer的实例, 实际调用BaseWSGIServer实例的serve_forever方法;  
 2. BaseWSGIServer的__init__方法中，将WSGIRequestHandler赋予给handler变量，此处比较重要，暂时埋个伏笔，现在BaseWSGIServer的serve_forever方法, 可以看到其实是调用父类HTTPServer的serve_forever，并将实例本身self传递进去。
-3. 在看HTTPServer类，
+3. 在看HTTPServer类中，并没有发现serve_forever方法，执行继续在父类TCPServer中寻找，但是TCPServer也没有serve_forever方法，继续寻找TCPServer的父类BaseServer。
+4. 在BaseServer中，终于找到serve_forever方法的实现，具体看一下：  
+```python
+class BaseServer:
+  
+   def serve_forever(self, poll_interval=0.5):
+   """
+   省略其他逻辑，关键代码就一行
+   """
+                        self._handle_request_noblock()
+```
 
 
 
