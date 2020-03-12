@@ -91,9 +91,19 @@ class Flask(_PackageBoundObject):
 
 ```
 >
-从代码可知，app.run调用werkzeug.serving的run_sample，并把host、port、self(app的实例)等参数传递给run_sample。后续的wsgi逻辑都在werkzeug里处理，说起werkzeug，不得不说这是flask作者的又一大基础库，它用于wsgi应用程序的各种实用工具的集合，现在已经成为最先进的wsgi实用库之一。Flask封装Werkzeug，用它来处理WSGI的细节，同时通过提供更多的结构和模式来定义强大的web应用。  
+从代码可知，app.run调用werkzeug.serving的run_sample，并把host、port、self(app的实例)等参数传递给run_sample。后续的wsgi逻辑都在werkzeug里处理，说起werkzeug，不得不说这是flask作者的又一大基础库，是wsgi应用程序的各种实用工具的集合，现在已经成为最先进的wsgi实用库之一。  
+Flask封装Werkzeug，用它来处理WSGI的细节，同时通过提供更多的结构和模式来定义强大的web应用。  
 下面就用流程图，简单看一下werkzeug内部的调用逻辑：  
 ![flask_base](../__img/flask_base.jpg)
+
+
+werkzeug内部的调用逻辑:  
+1. make_server返回BaseWSGIServer的实例, 实际调用BaseWSGIServer实例的serve_forever方法;  
+2. BaseWSGIServer的__init__方法中，将WSGIRequestHandler赋予给handler变量，此处比较重要，暂时埋个伏笔，现在BaseWSGIServer的serve_forever方法, 可以看到其实是调用父类HTTPServer的serve_forever，并将实例本身self传递进去。
+3. 在看HTTPServer类，
+
+
+
 
 
 参考文档：  
