@@ -91,9 +91,29 @@ class Flask(_PackageBoundObject):
 
 ```
 >
-从代码可知，app.run调用werkzeug.serving的run_sample，并把host、port、self(app的实例)等参数传递给run_sample。后续的wsgi逻辑都在werkzeug里处理，说起werkzeug，不得不说这是flask作者的又一大基础库，它用于wsgi应用程序的各种实用工具的集合，现在已经成为最先进的wsgi实用库之一。Flask封装Werkzeug，用它来处理WSGI的细节，同时通过提供更多的结构和模式来定义强大的web应用。  
+从代码可知，app.run调用werkzeug.serving的run_sample，并把host、port、self(app的实例)等参数传递给run_sample。后续的wsgi逻辑都在werkzeug里处理，说起werkzeug，不得不说这是flask作者的又一大基础库，是wsgi应用程序的各种实用工具的集合，现在已经成为最先进的wsgi实用库之一。  
+Flask封装Werkzeug，用它来处理WSGI的细节，同时通过提供更多的结构和模式来定义强大的web应用。  
 下面就用流程图，简单看一下werkzeug内部的调用逻辑：  
 ![flask_base](../__img/flask_base.jpg)
+
+
+werkzeug内部的调用逻辑:  
+1. make_server返回BaseWSGIServer的实例, 实际调用BaseWSGIServer实例的serve_forever方法;  
+2. BaseWSGIServer的__init__方法中，将WSGIRequestHandler赋予给handler变量，此处比较重要，暂时埋个伏笔，现在BaseWSGIServer的serve_forever方法, 可以看到其实是调用父类HTTPServer的serve_forever，并将实例本身self传递进去。
+3. 在看HTTPServer类中，并没有发现serve_forever方法，执行继续在父类TCPServer中寻找，但是TCPServer也没有serve_forever方法，继续寻找TCPServer的父类BaseServer。
+4. 在BaseServer中，终于找到serve_forever方法的实现，具体看一下：  
+```python
+class BaseServer:
+  
+   def serve_forever(self, poll_interval=0.5):
+   """
+   省略其他逻辑，关键代码就一行
+   """
+                        self._handle_request_noblock()
+```
+
+
+
 
 
 参考文档：  
