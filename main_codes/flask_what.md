@@ -211,7 +211,9 @@ class WSGIRequestHandler(BaseHTTPRequestHandler, object):
 由以上源码可知调用逻辑: WSGIRequestHandler.handle_one_request --> WSGIRequestHandler.run_wsgi --> WSGIRequestHandler.run_wsgi内部的execute函数。
 我们可以看到execute运行app的__call__方法时，传递environ和start_response参数；其中
 * environ: 一个包含全部HTTP请求信息的字典，由WSGI Server解包HTTP请求生成；
-* start_response: 一个WSGI Server提供的函数，调用可以发送响应的状态码和HTTP报文头， 函数在返回前必须调用一次start_response()。
+* start_response: 一个WSGI Server提供的函数，调用可以发送响应的状态码和HTTP报文头， 函数在返回前必须调用一次start_response()。  
+
+
 到此，终于看到werkzeug处理wsgi对象的所有逻辑;
 
 
