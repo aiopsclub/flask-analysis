@@ -99,18 +99,122 @@ Flask封装Werkzeug，用它来处理WSGI的细节，同时通过提供更多的
 
 werkzeug内部的调用逻辑:  
 1. make_server返回BaseWSGIServer的实例, 实际调用BaseWSGIServer实例的serve_forever方法;  
-2. BaseWSGIServer的__init__方法中，将WSGIRequestHandler赋予给handler变量，此处比较重要，暂时埋个伏笔，现在BaseWSGIServer的serve_forever方法, 可以看到其实是调用父类HTTPServer的serve_forever，并将实例本身self传递进去。
+2. BaseWSGIServer的__init__方法中，将WSGIRequestHandler赋予给handler变量，以及进行父类的初始化，即HTTPServer.__init__(self, server_address, handler)，此处比较重要，暂时埋个伏笔，现在BaseWSGIServer的serve_forever方法, 可以看到其实是调用父类HTTPServer的serve_forever，并将实例本身self传递进去。
 3. 在看HTTPServer类中，并没有发现serve_forever方法，执行继续在父类TCPServer中寻找，但是TCPServer也没有serve_forever方法，继续寻找TCPServer的父类BaseServer。
 4. 在BaseServer中，终于找到serve_forever方法的实现，具体看一下：  
 ```python
 class BaseServer:
   
-   def serve_forever(self, poll_interval=0.5):
-   """
-   省略其他逻辑，关键代码就一行
-   """
-                        self._handle_request_noblock()
+    def serve_forever(self, poll_interval=0.5):
+        """
+        省略其他逻辑，关键代码就一行
+        """
+                         self._handle_request_noblock()
+
+    def _handle_request_noblock(self):
+        """
+        省略其他逻辑，关键代码就一行
+        """
+                 self.process_request(request, client_address)
+
+    def process_request(self, request, client_address):
+        """
+        省略其他逻辑，关键代码就一行
+        """
+        self.finish_request(request, client_address)
+
+    def finish_request(self, request, client_address):
+        """Finish one request by instantiating RequestHandlerClass."""
+        self.RequestHandlerClass(request, client_address, self)
 ```
+由源码可知，调用链为serve_forever -->   _handle_request_noblock --> process_request --> finish_request。
+最后进行RequestHandlerClass的实例化，还记得我们前面的提到的伏笔，此处的RequestHandlerClass就是WSGIRequestHandler类。
+接下来我们看WSGIRequestHandler的源码，发现并没有__init__方法，继续向上查看BaseHTTPRequestHandler类，发现仍旧没有，但是我们不能放弃，继续加油，来看socketserver.StreamRequestHandler父类，发现也没有，苍天呐，藏这么深，自己的路，跪着也得走完，继续看BaseRequestHandler，终于找到__init__方法：
+```python
+class BaseRequestHandler:
+
+    def __init__(self, request, client_address, server):
+        """
+        关键代码就是self.handle()的调用
+        """
+        try:
+            self.handle()
+        finally:
+            self.finish()
+```
+由源码可知，self.handle()是调用实例的handle方法，于是我们又来看WSGIRequestHandler类，发现确实存在handle方法，贴代码：
+```python
+class WSGIRequestHandler(BaseHTTPRequestHandler, object):
+
+    def handle(self):
+        """Handles a request ignoring dropped connections."""
+        try:
+            BaseHTTPRequestHandler.handle(self)
+        except (_ConnectionError, socket.timeout) as e:
+            self.connection_dropped(e)
+        except Exception as e:
+            if self.server.ssl_context is None or not is_ssl_error(e):
+                raise
+        if self.server.shutdown_signal:
+            self.initiate_shutdown()
+```
+看WSGIRequestHandler的handle方法，发现竟然调用的是父类BaseHTTPRequestHandler的handle方法，贴父类BaseHTTPRequestHandler的handle方法的实现：
+```python
+class BaseHTTPRequestHandler(socketserver.StreamRequestHandler):
+    def handle(self):
+        """Handle multiple requests if necessary."""
+        self.close_connection = True
+
+        self.handle_one_request()
+        while not self.close_connection:
+            self.handle_one_request()
+
+```
+由源码可知，调用实例self的handle_one_request方法，然后再看WSGIRequestHandler的handle_one_request方法，
+```python
+class WSGIRequestHandler(BaseHTTPRequestHandler, object):
+
+    def handle_one_request(self):
+        """关键逻辑就一行"""
+            return self.run_wsgi()
+
+    def run_wsgi(self):
+        """去除枝叶
+        """保留主干
+
+        self.environ = environ = self.make_environ()
+
+        """函数体内定义方法"""
+        def write(data):
+            """避免干扰 省略其实现"""
+
+        def start_response(status, response_headers, exc_info=None):
+            """避免干扰 省略其实现"""
+
+        def execute(app):
+            """app参数为wsgi的应用对象"""
+            application_iter = app(environ, start_response)
+            try:
+                for data in application_iter:
+                    write(data)
+                if not headers_sent:
+                    write(b"")
+            finally:
+                if hasattr(application_iter, "close"):
+                    application_iter.close()
+
+        """去除异常处理
+           关键逻辑就就一行
+        """
+            execute(self.server.app)
+```
+由以上源码可知调用逻辑: WSGIRequestHandler.handle_one_request --> WSGIRequestHandler.run_wsgi --> WSGIRequestHandler.run_wsgi内部的execute函数。
+我们可以看到execute运行app的__call__方法时，传递environ和start_response参数；其中
+* environ: 一个包含全部HTTP请求信息的字典，由WSGI Server解包HTTP请求生成；
+* start_response: 一个WSGI Server提供的函数，调用可以发送响应的状态码和HTTP报文头， 函数在返回前必须调用一次start_response()。
+到此，终于看到werkzeug处理wsgi对象的所有逻辑;
+
+
 
 
 
