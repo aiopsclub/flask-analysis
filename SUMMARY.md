@@ -14,5 +14,5 @@
    * [路由匹配探秘](main_codes/flask_route_match.md)
    * [全局对象request解析](main_codes/flask_request.md)
 * [推荐阅读](seealso.md)
-* [捐赠名单](donors.md)
+* [贡献名单](donors.md)
 
