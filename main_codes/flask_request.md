@@ -167,4 +167,4 @@ request = LocalProxy(partial(_lookup_req_object, "request"))
 * CORSRequestMixin
 * CommonRequestDescriptorsMixin
 
-这样`request`实例就被赋予多种属性与方法，方便在调用访问当前http请求的各种信息。
+这样`request`实例就被赋予多种属性与方法，方便在调用时访问当前http请求的各种信息。
