@@ -130,9 +130,12 @@ class BaseServer:
         """Finish one request by instantiating RequestHandlerClass."""
         self.RequestHandlerClass(request, client_address, self)
 ```
-由源码可知，调用链为serve_forever -->   _handle_request_noblock --> process_request --> finish_request。
-最后进行RequestHandlerClass的实例化，还记得我们前面的提到的伏笔，此处的RequestHandlerClass就是WSGIRequestHandler类。
-接下来我们看WSGIRequestHandler的源码，发现并没有__init__方法，继续向上查看BaseHTTPRequestHandler类，发现仍旧没有，但是我们不能放弃，继续加油，来看socketserver.StreamRequestHandler父类，发现也没有，苍天呐，藏这么深，自己的路，跪着也得走完，继续看BaseRequestHandler，终于找到__init__方法：
+
+由源码可知，调用链为`serve_forever -->   _handle_request_noblock --> process_request --> finish_request`。  
+最后进行`RequestHandlerClass`的实例化，还记得我们前面的提到的伏笔，此处的`RequestHandlerClass`就是`WSGIRequestHandler`类。  
+
+接下来我们看`WSGIRequestHandler`的源码，发现并没有`__init__`方法，继续向上查看`BaseHTTPRequestHandler`类，发现仍旧没有，但是我们不能放弃，继续加油，来看`socketserver.StreamRequestHandler`父类，发现也没有，苍天呐，藏这么深，自己的路，跪着也得走完，继续看`BaseRequestHandler`，终于找到`__init__`方法：  
+
 ```python
 class BaseRequestHandler:
 
@@ -145,7 +148,9 @@ class BaseRequestHandler:
         finally:
             self.finish()
 ```
-由源码可知，self.handle()是调用实例的handle方法，于是我们又来看WSGIRequestHandler类，发现确实存在handle方法，贴代码：
+
+由源码可知，self.handle()是调用实例的handle方法，于是我们又来看WSGIRequestHandler类，发现确实存在handle方法，贴代码：  
+
 ```python
 class WSGIRequestHandler(BaseHTTPRequestHandler, object):
 
@@ -161,7 +166,9 @@ class WSGIRequestHandler(BaseHTTPRequestHandler, object):
         if self.server.shutdown_signal:
             self.initiate_shutdown()
 ```
-看WSGIRequestHandler的handle方法，发现竟然调用的是父类BaseHTTPRequestHandler的handle方法，贴父类BaseHTTPRequestHandler的handle方法的实现：
+
+看WSGIRequestHandler的handle方法，发现竟然调用的是父类BaseHTTPRequestHandler的handle方法，贴父类BaseHTTPRequestHandler的handle方法的实现：  
+
 ```python
 class BaseHTTPRequestHandler(socketserver.StreamRequestHandler):
     def handle(self):
@@ -173,7 +180,8 @@ class BaseHTTPRequestHandler(socketserver.StreamRequestHandler):
             self.handle_one_request()
 
 ```
-由源码可知，调用实例self的handle_one_request方法，然后再看WSGIRequestHandler的handle_one_request方法，
+由源码可知，调用实例`self`的`handle_one_request`方法，然后再看`WSGIRequestHandler`的`handle_one_request`方法，
+
 ```python
 class WSGIRequestHandler(BaseHTTPRequestHandler, object):
 
@@ -211,8 +219,10 @@ class WSGIRequestHandler(BaseHTTPRequestHandler, object):
         """
             execute(self.server.app)
 ```
-由以上源码可知调用逻辑: WSGIRequestHandler.handle_one_request --> WSGIRequestHandler.run_wsgi --> WSGIRequestHandler.run_wsgi内部的execute函数。
-我们可以看到execute运行app的__call__方法时，传递environ和start_response参数；其中
+
+由以上源码可知调用逻辑: `WSGIRequestHandler.handle_one_request --> WSGIRequestHandler.run_wsgi --> WSGIRequestHandler.run_wsgi内部的execute函数`。
+我们可以看到`execute`运行`app`的`__call__`方法时，传递`environ`和`start_response`参数；其中  
+
 * environ: 一个包含全部HTTP请求信息的字典，由WSGI Server解包HTTP请求生成；
 * start_response: 一个WSGI Server提供的函数，调用可以发送响应的状态码和HTTP报文头， 函数在返回前必须调用一次start_response()。  
 
