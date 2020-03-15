@@ -13,6 +13,7 @@
    * [路由系统 为何如此简洁高效](main_codes/flask_route.md)
    * [路由匹配探秘](main_codes/flask_route_match.md)
    * [全局对象request解析](main_codes/flask_request.md)
+   * [全局对象g解析](main_codes/flask_g.md)
 * [推荐阅读](seealso.md)
 * [贡献名单](donors.md)
 
