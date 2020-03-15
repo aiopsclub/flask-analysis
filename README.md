@@ -5,7 +5,7 @@ flask源码进阶[version: 1.1.1]
 
 ### 快速阅读传送门
 - Github快速阅读任一章节：[进入目录](https://github.com/aiopsclub/flask-analysis/blob/master/SUMMARY.md)
-- Gitbook完整顺序地阅读：[进入Gitbook](https://eastlakeside.gitbooks.io/interpy-zh/content/)
+- Gitbook完整顺序地阅读：[进入Gitbook](https://aiopsclub.gitbook.io/flask-analysis/)
 - 本地或kindle上阅读：[下载pdf/epub/mobi](https://github.com/aiopsclub/flask-analysis/releases)
 
 # 前言
