@@ -1,6 +1,6 @@
 # `flask`流程分析
->  
 首先我们先来看一个简单的flask应用:  
+
 ```python
 from flask import Flask
 
