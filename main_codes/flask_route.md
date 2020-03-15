@@ -59,7 +59,6 @@ class Flask(_PackageBoundObject):
 
         return decorator
 ```
->
 由代码可知，`route`函数其实调用`add_url_rule`函数。基本参数为：`rule methods enpoint`等；  
 `add_url_rule`的作用主要构造路由相关逻辑，包含`werkzeug`的`routing`模块的`Map`类和`Rule`类。  
 `url_map`就是`Map`类的实例化对象，`rule`是`Rule`的实例化对象，实例化的同时将rule和endpint的关系绑定，同时将`rule`对象传递给`self.url_map`的add函数，同时更新`view_functions`字典，将`enpoint`和`view_func`的对应关系更新进去。  
