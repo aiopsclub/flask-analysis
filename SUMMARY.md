@@ -15,6 +15,7 @@
    * [全局对象request解析](main_codes/flask_request.md)
    * [全局对象g解析](main_codes/flask_g.md)
    * [全局对象current_app解析](main_codes/flask_current_app.md)
+   * [全局对象session解析](main_codes/flask_session.md)
 * [推荐阅读](seealso.md)
 * [贡献名单](donors.md)
 
