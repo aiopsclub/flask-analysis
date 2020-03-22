@@ -16,6 +16,7 @@
    * [全局对象g解析](main_codes/flask_g.md)
    * [全局对象current_app解析](main_codes/flask_current_app.md)
    * [全局对象session解析](main_codes/flask_session.md)
+   * [flask特性之signal系统](main_codes/flask_signal.md)
 * [推荐阅读](seealso.md)
 * [贡献名单](donors.md)
 
