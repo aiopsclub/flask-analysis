@@ -18,6 +18,7 @@
    * [全局对象session解析](main_codes/flask_session.md)
    * [flask特性之signal系统](main_codes/flask_signal.md)
    * [flask特性之buleprint](main_codes/flask_blueprint.md)
+   * [flask特性之配置系统](main_codes/flask_configsystem.md)
 * [flask生态](ecology/overview.md)
 * [推荐阅读](seealso.md)
 * [贡献名单](donors.md)
