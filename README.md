@@ -1,7 +1,7 @@
 flask源码进阶
 =======
 
-《flask源码进阶》是一本详尽的flask的源代码分析的书籍，通过falsk源码的学习，对整个web框架流程做到心知肚明。该书是基于falsk的1.1.1版本构建的。
+《flask源码进阶》是一本详尽的flask的源代码分析的书籍，通过flask源码的学习，对整个web框架流程做到心知肚明。该书是基于flask的1.1.1版本构建的。
 
 ### 快速阅读传送门
 - Github快速阅读任一章节：[进入目录](https://github.com/aiopsclub/flask-analysis/blob/master/SUMMARY.md)
