@@ -210,7 +210,8 @@ image_store_config = app.config.get_namespace('IMAGE_STORE_')
 修改：  
 * app.config["example"] =  "example"
 * app.testting = False 这种方式默认只提供有限的配置项
-* app.config.update(TESTING=True) 
+* app.config.update(TESTING=True)  
+
 删除：  
 * del app.config["example"]
 
