@@ -20,6 +20,7 @@
    * [flask特性之blueprint](main_codes/flask_blueprint.md)
    * [flask特性之methodview](main_codes/flask_methodview.md)
    * [flask特性之配置系统](main_codes/flask_configsystem.md)
+   * [flask特性之模板系统](main_codes/flask_templates.md)
 * [flask生态](ecology/overview.md)
 * [推荐阅读](seealso.md)
 * [贡献名单](donors.md)
