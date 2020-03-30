@@ -90,7 +90,7 @@ class Flask(_PackageBoundObject):
         return self.wsgi_app(environ, start_response)
 
 ```
-从代码可知，app.run调用werkzeug.serving的run_sample，并把host、port、self(app的实例)等参数传递给run_sample。后续的wsgi逻辑都在werkzeug里处理，说起werkzeug，不得不说这是flask作者的又一大基础库，是wsgi应用程序的各种实用工具的集合，现在已经成为最先进的wsgi实用库之一。  
+从代码可知，app.run调用werkzeug.serving的run_simple，并把host、port、self(app的实例)等参数传递给run_sample。后续的wsgi逻辑都在werkzeug里处理，说起werkzeug，不得不说这是flask作者的又一大基础库，是wsgi应用程序的各种实用工具的集合，现在已经成为最先进的wsgi实用库之一。  
 
 Flask封装Werkzeug，用它来处理WSGI的细节，同时通过提供更多的结构和模式来定义强大的web应用。  
 
