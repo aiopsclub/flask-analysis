@@ -1,9 +1,9 @@
 # `src/flask`目录
 主要文件：
 * json：涉及到flask的json的序列化和反序列化函数和类
-* __init__.py：里面涉及flask自身提高的函数和方法，可有flask模块直接导入。
-* __main__.py：这是可执行python文件，功能和命令行flask run一致。
-* _compat.py：主要处理python2和python3兼容性的问题，这样就可以在使用时不关心python的版本。  
+* `__init__.py`：里面涉及flask自身提高的函数和方法，可有flask模块直接导入。
+* `__main__.py`：这是可执行python文件，功能和命令行flask run一致。
+* `_compat.py`：主要处理python2和python3兼容性的问题，这样就可以在使用时不必关心python的版本。  
 * app.py：实现核心WSGI应用对象。 
 * blueprints.py：实现蓝图处理的相关函数和类，推荐在大型项目中使用。
 * cli.py：运行flask的应用的简单命令行实现。

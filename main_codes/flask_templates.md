@@ -43,7 +43,7 @@ def render_template_string(source, **context):
     return _render(ctx.app.jinja_env.from_string(source), context, ctx.app)
 
 ```
-在flask进行处理时，处理集jinja2模板，在`_render`函数中清楚的体现出来，`render_template`、`render_template_string`实际最后都会调用_rener函数，两者最主要的区别在于在于文件加载和字符串加载。具体的模板语法可参考jinja2的官方文档。
+在flask进行处理时，依赖于jinja2模板，在`_render`函数中清楚的体现出来，`render_template`、`render_template_string`实际最后都会调用_render函数，两者最主要的区别在于在于文件加载和字符串加载。具体的模板语法可参考jinja2的官方文档。
 
 
 参考文档：  
