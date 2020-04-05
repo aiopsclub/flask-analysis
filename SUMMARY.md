@@ -22,6 +22,9 @@
    * [flask特性之配置系统](main_codes/flask_configsystem.md)
    * [flask特性之模板系统](main_codes/flask_templates.md)
 * [flask生态](ecology/overview.md)
+   * [官方文档](ecology/docs.md)
+   * [插件推荐](ecology/plugins.md)
+   * [插件开发](ecology/plugins_dev.md)
 * [推荐阅读](seealso.md)
 * [贡献名单](donors.md)
 
